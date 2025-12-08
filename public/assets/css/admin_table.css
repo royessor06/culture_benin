@@ -1,0 +1,46 @@
+/* Animation fade */
+.fade-in { animation: fadeIn 0.6s ease; }
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(15px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Table générale */
+.table-admin {
+    border-radius: 12px;
+    overflow: hidden;
+    background: white;
+}
+.table-admin thead {
+    background: #f9f3d1;
+    color: #6d5600;
+    font-weight: 600;
+}
+
+/* Hover */
+.table-admin tbody tr {
+    transition: 0.25s;
+}
+.table-admin tbody tr:hover {
+    background: rgba(232,182,0,0.08);
+}
+
+/* Badges statut */
+.badge-status {
+    padding: 5px 10px;
+    border-radius: 12px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+.status-publie   { background: #d4f8d4; color: #2d7a2d; }
+.status-brouillon { background: #fff4d6; color: #8a6b00; }
+.status-rejete   { background: #ffd6d6; color: #ab1c1c; }
+
+/* Boutons */
+.btn {
+    border-radius: 10px !important;
+}
+.btn-primary { background: #d4a600; border: none; }
+.btn-primary:hover { background: #b78f00; }
+.btn-danger { background: #cc2a36; border: none; }
+.btn-danger:hover { background: #b21f2b; }

@@ -1,0 +1,350 @@
+/* Changement complet du thème */
+:root,
+[data-bs-theme=light] {
+  /* Couleurs principales - Thème moderne professionnel */
+  --bs-blue: #2A6EBB;
+  --bs-indigo: #6A4C93;
+  --bs-purple: #8A4FFF;
+  --bs-pink: #E91E63;
+  --bs-red: #E74C3C;
+  --bs-orange: #F39C12;
+  --bs-yellow: #FFC107;
+  --bs-green: #27AE60;
+  --bs-teal: #1ABC9C;
+  --bs-cyan: #3498DB;
+
+  /* Couleurs sémantiques */
+  --bs-primary: #2A6EBB;
+  --bs-primary-rgb: 42, 110, 187;
+  --bs-secondary: #95A5A6;
+  --bs-secondary-rgb: 149, 165, 166;
+  --bs-success: #27AE60;
+  --bs-success-rgb: 39, 174, 96;
+  --bs-info: #3498DB;
+  --bs-info-rgb: 52, 152, 219;
+  --bs-warning: #F39C12;
+  --bs-warning-rgb: 243, 156, 18;
+  --bs-danger: #E74C3C;
+  --bs-danger-rgb: 231, 76, 60;
+  --bs-light: #F8F9FA;
+  --bs-light-rgb: 248, 249, 250;
+  --bs-dark: #2C3E50;
+  --bs-dark-rgb: 44, 62, 80;
+
+  /* Variables supplémentaires */
+  --bs-body-color: #34495E;
+  --bs-body-bg: #FFFFFF;
+  --bs-border-color: #E3E6F0;
+  --bs-border-radius: 8px;
+  --bs-border-radius-sm: 6px;
+  --bs-border-radius-lg: 10px;
+  --bs-box-shadow: 0 0.125rem 0.25rem rgba(44, 62, 80, 0.075);
+  --bs-box-shadow-sm: 0 0.0625rem 0.125rem rgba(44, 62, 80, 0.05);
+  --bs-box-shadow-lg: 0 0.5rem 1rem rgba(44, 62, 80, 0.15);
+
+  /* Sidebar */
+  --lte-sidebar-width: 280px;
+  --lte-sidebar-bg: #2C3E50;
+  --lte-sidebar-color: #BDC3C7;
+  --lte-sidebar-hover-bg: #34495E;
+  --lte-sidebar-hover-color: #FFFFFF;
+  --lte-sidebar-active-color: #FFFFFF;
+  --lte-sidebar-menu-active-bg: #1ABC9C;
+  --lte-sidebar-menu-active-color: #FFFFFF;
+  --lte-sidebar-submenu-bg: #253544;
+  --lte-sidebar-submenu-color: #95A5A6;
+  --lte-sidebar-submenu-hover-color: #FFFFFF;
+  --lte-sidebar-submenu-hover-bg: #2C3E50;
+  --lte-sidebar-submenu-active-color: #1ABC9C;
+  --lte-sidebar-submenu-active-bg: rgba(26, 188, 156, 0.1);
+  --lte-sidebar-header-color: #7F8C8D;
+}
+
+/* Thème sombre */
+[data-bs-theme=dark] {
+  --bs-body-color: #ECF0F1;
+  --bs-body-bg: #1A252F;
+  --bs-border-color: #2C3E50;
+  --lte-sidebar-bg: #253544;
+  --lte-sidebar-color: #BDC3C7;
+  --lte-sidebar-hover-bg: #2C3E50;
+  --lte-sidebar-submenu-bg: #1C2833;
+}
+
+/* Boutons primaires modernisés */
+.btn-primary {
+  --bs-btn-bg: var(--bs-primary);
+  --bs-btn-border-color: var(--bs-primary);
+  --bs-btn-hover-bg: #1E5CA6;
+  --bs-btn-hover-border-color: #1E5CA6;
+  --bs-btn-active-bg: #1A4F8C;
+  --bs-btn-active-border-color: #1A4F8C;
+  --bs-btn-disabled-bg: var(--bs-primary);
+  --bs-btn-disabled-border-color: var(--bs-primary);
+}
+
+/* Cards modernes */
+.card {
+  --bs-card-border-color: var(--bs-border-color);
+  --bs-card-border-radius: var(--bs-border-radius);
+  box-shadow: var(--bs-box-shadow);
+  border: none;
+}
+
+.card-header {
+  background-color: var(--bs-light);
+  border-bottom: 1px solid var(--bs-border-color);
+  font-weight: 600;
+}
+
+/* Navbar stylisée */
+.app-header {
+  background: linear-gradient(135deg, var(--bs-primary) 0%, #3498DB 100%);
+  border-bottom: none;
+  box-shadow: var(--bs-box-shadow);
+}
+
+.app-header .nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.app-header .nav-link:hover {
+  color: #FFFFFF !important;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Sidebar améliorée */
+.app-sidebar {
+  background-color: var(--lte-sidebar-bg);
+  box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.sidebar-brand {
+  background-color: #253544;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.sidebar-brand .brand-text {
+  color: #FFFFFF;
+  font-weight: 600;
+  font-size: 1.3rem;
+}
+
+/* Formulaires modernes */
+.form-control {
+  border-radius: var(--bs-border-radius-sm);
+  border: 1px solid var(--bs-border-color);
+  transition: all 0.3s ease;
+}
+
+.form-control:focus {
+  border-color: var(--bs-primary);
+  box-shadow: 0 0 0 0.25rem rgba(42, 110, 187, 0.25);
+}
+
+/* Tables améliorées */
+.table {
+  --bs-table-hover-bg: rgba(42, 110, 187, 0.05);
+  --bs-table-striped-bg: rgba(42, 110, 187, 0.02);
+}
+
+.table thead th {
+  border-bottom: 2px solid var(--bs-primary);
+  font-weight: 600;
+  color: var(--bs-dark);
+}
+
+/* Progress bars colorées */
+.progress-bar {
+  border-radius: var(--bs-border-radius);
+}
+
+/* Alerts modernisés */
+.alert {
+  border: none;
+  border-radius: var(--bs-border-radius);
+  box-shadow: var(--bs-box-shadow-sm);
+}
+
+/* Badges arrondis */
+.badge {
+  border-radius: 50px;
+  padding: 0.35em 0.65em;
+  font-weight: 500;
+}
+
+/* Boutons arrondis */
+.btn {
+  border-radius: var(--bs-border-radius);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.btn-sm {
+  border-radius: var(--bs-border-radius-sm);
+}
+
+.btn-lg {
+  border-radius: var(--bs-border-radius-lg);
+}
+
+/* Tabs modernes */
+.nav-tabs {
+  border-bottom: 2px solid var(--bs-border-color);
+}
+
+.nav-tabs .nav-link {
+  border: none;
+  border-bottom: 3px solid transparent;
+  color: var(--bs-secondary);
+  font-weight: 500;
+  padding: 0.75rem 1.5rem;
+}
+
+.nav-tabs .nav-link:hover {
+  border-bottom-color: var(--bs-border-color);
+}
+
+.nav-tabs .nav-link.active {
+  color: var(--bs-primary);
+  border-bottom-color: var(--bs-primary);
+  background-color: transparent;
+}
+
+/* Pagination modernisée */
+.pagination {
+  --bs-pagination-active-bg: var(--bs-primary);
+  --bs-pagination-active-border-color: var(--bs-primary);
+}
+
+/* Dropdowns stylisés */
+.dropdown-menu {
+  border: none;
+  box-shadow: var(--bs-box-shadow-lg);
+  border-radius: var(--bs-border-radius);
+  border: 1px solid var(--bs-border-color);
+}
+
+/* Modals modernes */
+.modal-content {
+  border: none;
+  border-radius: var(--bs-border-radius-lg);
+  box-shadow: var(--bs-box-shadow-lg);
+}
+
+/* Toasts améliorés */
+.toast {
+  border: none;
+  box-shadow: var(--bs-box-shadow-lg);
+}
+
+/* Small boxes modernes */
+.small-box {
+  border-radius: var(--bs-border-radius);
+  overflow: hidden;
+  border: none;
+}
+
+.small-box .small-box-icon {
+  font-size: 60px;
+  opacity: 0.3;
+}
+
+/* Info boxes améliorées */
+.info-box {
+  border-radius: var(--bs-border-radius);
+  border: none;
+}
+
+.info-box .info-box-icon {
+  border-radius: var(--bs-border-radius) 0 0 var(--bs-border-radius);
+}
+
+/* Timeline moderne */
+.timeline::before {
+  background-color: var(--bs-border-color);
+  width: 3px;
+}
+
+.timeline > div .timeline-icon {
+  width: 40px;
+  height: 40px;
+  line-height: 40px;
+  font-size: 18px;
+}
+
+/* Direct chat modernisé */
+.direct-chat-text {
+  border-radius: var(--bs-border-radius-lg);
+}
+
+/* Login/Register pages */
+.login-page,
+.register-page {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.login-card-body,
+.register-card-body {
+  border-radius: var(--bs-border-radius-lg);
+}
+
+/* Boutons de tool améliorés */
+.btn-tool {
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .app-sidebar {
+    box-shadow: none;
+  }
+
+  .card {
+    border-radius: 0;
+    box-shadow: none;
+    border: 1px solid var(--bs-border-color);
+  }
+}
+
+/* Animations subtiles */
+.card,
+.btn,
+.nav-link,
+.form-control {
+  transition: all 0.3s ease;
+}
+
+/* Effets hover */
+.btn:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--bs-box-shadow);
+}
+
+.card:hover {
+  box-shadow: var(--bs-box-shadow-lg);
+}
+
+/* Scrollbar personnalisée */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bs-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--bs-secondary);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--bs-primary);
+}
