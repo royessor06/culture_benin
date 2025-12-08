@@ -9,20 +9,22 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('utilisateur_id')->constrained()->onDelete('cascade');
-            $table->foreignId('contenu_id')->nullable()->constrained()->onDelete('set null');
-            $table->string('transaction_id')->unique();
-            $table->string('reference')->unique();
-            $table->decimal('amount', 10, 2);
-            $table->string('currency')->default('XOF');
-            $table->string('status')->default('pending'); // pending, success, failed
-            $table->string('payment_method')->nullable();
+            $table->foreignId('utilisateur_id')->nullable()->constrained()->onDelete('set null');
+            $table->foreignId('contenu_id')->constrained()->onDelete('cascade');
+            $table->string('transaction_id');
+            $table->integer('amount');
+            $table->string('currency', 3)->default('XOF');
+            $table->enum('status', ['pending', 'approved', 'canceled', 'declined'])->default('pending');
             $table->json('metadata')->nullable();
+            $table->timestamp('paid_at')->nullable();
             $table->timestamps();
+
+            $table->index('transaction_id');
+            $table->index('status');
         });
     }
 

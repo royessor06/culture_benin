@@ -55,7 +55,7 @@ class RegionsController extends Controller
     public function edit(string $id)
     {
         $region = Region::findOrFail($id);
-        return view('region.edit', compact('region'));
+        return view('regions.edit', compact('region'));
     }
 
     /**

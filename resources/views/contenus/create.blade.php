@@ -1,4 +1,7 @@
-@extends('acceuil')
+@extends('layouts.layout')
+
+@section('title', 'Ajouter Contenu')
+
 
 @section('content')
 <div class="form-container">

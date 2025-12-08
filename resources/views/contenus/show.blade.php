@@ -1,5 +1,8 @@
 @extends('layouts.layout')
 
+@section('title', 'Détails du Contenu')
+
+
 @section('content')
 <div class="card">
     <div class="card-header">
@@ -19,7 +22,7 @@
             <ul class="list-group">
                 @foreach($contenu->commentaires as $commentaire)
                     <li class="list-group-item">
-                        <strong>{{ $commentaire->auteur->nom }} {{ $commentaire->auteur->prenom }} :</strong>
+                        <strong>{{ $commentaire->utilisateur->nom }} {{ $commentaire->utilisateur->prenom }} :</strong>
                         {{ $commentaire->texte }}
                         <br>
                         <small class="text-muted">Posté le {{ $commentaire->created_at->format('d/m/Y H:i') }}</small>

@@ -3,6 +3,7 @@
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';
 require __DIR__.'/front.php';
+require __DIR__.'/api.php';
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\SettingsController;
@@ -15,6 +16,7 @@ use App\Models\Contenu;
 use App\Models\TypeContenu;
 use App\Models\Region;
 use App\Models\Langue;
+use Illuminate\Support\Facades\Auth;
 
 
 
@@ -31,7 +33,9 @@ Route::get('/', function () {
     $regions = Region::all();
     $langues = Langue::all();
 
-    return view('acceuil', compact('types', 'regions', 'langues'));
+    $user = Auth::user();
+
+    return view('acceuil', compact('types', 'regions', 'langues', 'user'));
 })->name('acceuil');
 
 Route::get('/home', function () {
@@ -78,7 +82,4 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/help/contact', [HelpController::class, 'contact'])->name('help.contact');
     Route::post('/help/contact', [HelpController::class, 'sendMessage'])->name('help.send');
 
-    Route::post('/payment/initiate', [PaymentController::class, 'initiate'])->name('payment.initiate');
-    Route::get('/payment/callback', [PaymentController::class, 'callback'])->name('payment.callback');
-    Route::get('/payment/verify/{reference}', [PaymentController::class, 'verify'])->name('payment.verify');
 });

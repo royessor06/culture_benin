@@ -90,7 +90,7 @@ class ContenusController extends Controller
         $contenu = Contenu::with([
             'auteur',
             'moderateur',
-            'commentaires.auteur'
+            'commentaires.utilisateur'
         ])->findOrFail($id);
 
     return view('contenus.show', compact('contenu'));

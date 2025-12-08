@@ -6,10 +6,7 @@
 
 @section('header-actions')
 <div class="d-flex gap-2">
-    <a href="{{ route('contenu.create') }}" class="btn btn-primary btn-sm">
-        <i class="fas fa-plus"></i>
-        <span>Nouveau contenu</span>
-    </a>
+    
 </div>
 @endsection
 

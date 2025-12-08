@@ -4,10 +4,7 @@
 
 <?php $__env->startSection('header-actions'); ?>
 <div class="d-flex gap-2">
-    <a href="<?php echo e(route('contenu.create')); ?>" class="btn btn-primary btn-sm">
-        <i class="fas fa-plus"></i>
-        <span>Nouveau contenu</span>
-    </a>
+    
 </div>
 <?php $__env->stopSection(); ?>
 
