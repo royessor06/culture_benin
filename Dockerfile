@@ -18,11 +18,12 @@ COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 # Copier les fichiers du projet
 COPY . /var/www/html
 
-WORKDIR /var/www/html
-
-RUN php artisan key:generate
+# Définir le dossier public comme racine pour Apache
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
 
 # Installer les dépendances Laravel
+WORKDIR /var/www/html
 RUN composer install
 
 # Donner les droits nécessaires
