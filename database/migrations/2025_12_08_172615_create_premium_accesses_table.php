@@ -15,7 +15,8 @@ return new class extends Migration
             $table->id();
             $table->foreignId('utilisateur_id')->constrained()->onDelete('cascade');
             $table->foreignId('contenu_id')->constrained()->onDelete('cascade');
-            $table->foreignId('payment_id')->constrained()->onDelete('cascade');
+            $table->unsignedBigInteger('payment_id');
+            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->timestamp('expires_at');
             $table->timestamps();
 

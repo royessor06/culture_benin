@@ -1,0 +1,1 @@
+A propos de la culture du bénin<?php /**PATH C:\xampp\htdocs\culture\resources\views\about.blade.php ENDPATH**/ ?>
