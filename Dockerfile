@@ -30,10 +30,10 @@ RUN composer install
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-RUN php artisan migrate --force
-
 # Exposer le port d'Apache
 EXPOSE 80
+
+RUN php artisan migrate --seed
 
 # Commande par défaut
 CMD ["apache2-foreground"]
