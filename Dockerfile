@@ -27,9 +27,6 @@ RUN composer install
 RUN chown -R www-data:www-data /var/www/html \
     && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Clé Laravel (sera régénérée à la première connexion)
-RUN php artisan key:generate
-
 # Exposer le port d'Apache
 EXPOSE 80
 
