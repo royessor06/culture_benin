@@ -20,6 +20,8 @@ COPY . /var/www/html
 
 WORKDIR /var/www/html
 
+RUN php artisan key:generate
+
 # Installer les dépendances Laravel
 RUN composer install
 
