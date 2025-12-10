@@ -1,39 +1,47 @@
-# Utilise PHP 8.2 avec Apache
-FROM php:8.2-apache
+# Utiliser PHP 8.2 avec FPM
+FROM php:8.2-fpm
+
+# Installer les dépendances systèmes nécessaires
+RUN apt-get update && apt-get install -y \
+    git unzip zip curl \
+    libpng-dev libonig-dev libxml2-dev libpq-dev libjpeg-dev libfreetype6-dev \
+    postgresql-client \
+    && rm -rf /var/lib/apt/lists/*
+
+# Configurer GD avec JPEG/Freetype
+RUN docker-php-ext-configure gd --with-freetype --with-jpeg
 
 # Installer les extensions PHP nécessaires
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    zip \
-    unzip \
-    git \
-    curl \
-    && docker-php-ext-install pdo_mysql mbstring exif pcntl bcmath gd
+RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
 
 # Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Copier les fichiers du projet
-COPY . /var/www/html
+# Définir le répertoire de travail
+WORKDIR /var/www/html
 
-# Définir le dossier public comme racine pour Apache
-RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
-RUN a2enmod rewrite
+# Copier le projet
+COPY . .
 
 # Installer les dépendances Laravel
-WORKDIR /var/www/html
-RUN composer install
+RUN composer install --optimize-autoloader --no-dev
 
-# Donner les droits nécessaires
-RUN chown -R www-data:www-data /var/www/html \
-    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+# Exécuter les migrations
+RUN php artisan migrate --force --no-interaction || true
 
-# Exposer le port d'Apache
-EXPOSE 80
+# Exécuter les seeders
+RUN php artisan db:seed --force --no-interaction || true
 
-RUN php artisan migrate --seed
+# Vider les caches et regenerer l'autoloader
+RUN composer dumpautoload -o
+RUN php artisan config:clear || true
+RUN php artisan cache:clear || true
 
-# Commande par défaut
-CMD ["apache2-foreground"]
+# Donner les bonnes permissions aux dossiers storage et cache
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+
+# Exposer le port
+EXPOSE 8000
+
+# Démarrer Laravel
+CMD php artisan serve --host=0.0.0.0 --port=8000
