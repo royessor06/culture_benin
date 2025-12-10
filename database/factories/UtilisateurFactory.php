@@ -14,11 +14,6 @@ use App\Models\Langue;
 class UtilisateurFactory extends Factory
 {
     /**
-     * The current password being used by the factory.
-     */
-    protected static ?string $password;
-
-    /**
      * Define the model's default state.
      *
      * @return array<string, mixed>
@@ -26,14 +21,14 @@ class UtilisateurFactory extends Factory
     public function definition(): array
     {
         return [
-            'nom' => $this->faker->lastName,
-            'prenom' => $this->faker->firstName,
-            'email' => $this->faker->unique()->safeEmail,
+            'nom' => $this->faker->lastName,          // ✅ propriété, pas méthode
+            'prenom' => $this->faker->firstName,      // ✅ idem
+            'email' => $this->faker->unique()->safeEmail, // ✅ safeEmail est une propriété
             'email_verified_at' => now(),
             'mot_de_passe' => Hash::make('password'),
             'remember_token' => Str::random(10),
 
-            // Champs personnalisés de ton modèle
+            // Champs personnalisés
             'sexe' => $this->faker->randomElement(['M', 'F']),
             'date_naissance' => $this->faker->date(),
             'photo' => null,
