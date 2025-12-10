@@ -7,34 +7,30 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 use App\Models\Role;
 use App\Models\Langue;
+use Faker\Factory as FakerFactory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Utilisateur>
  */
 class UtilisateurFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
+        $faker = FakerFactory::create(); // ✅ instanciation manuelle
+
         return [
-            'nom' => $this->faker->lastName,          // ✅ propriété, pas méthode
-            'prenom' => $this->faker->firstName,      // ✅ idem
-            'email' => $this->faker->unique()->safeEmail, // ✅ safeEmail est une propriété
+            'nom' => $faker->lastName,
+            'prenom' => $faker->firstName,
+            'email' => $faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'mot_de_passe' => Hash::make('password'),
             'remember_token' => Str::random(10),
 
-            // Champs personnalisés
-            'sexe' => $this->faker->randomElement(['M', 'F']),
-            'date_naissance' => $this->faker->date(),
+            'sexe' => $faker->randomElement(['M', 'F']),
+            'date_naissance' => $faker->date(),
             'photo' => null,
             'statut' => 'actif',
 
-            // Relations
             'role_id' => Role::inRandomOrder()->value('id') ?? 1,
             'langue_id' => Langue::inRandomOrder()->value('id') ?? 1,
         ];
