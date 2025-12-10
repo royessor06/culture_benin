@@ -26,12 +26,6 @@ COPY . .
 # Installer les dépendances Laravel
 RUN composer install --optimize-autoloader --no-dev
 
-# Exécuter les migrations
-RUN php artisan migrate --force --no-interaction || true
-
-# Exécuter les seeders
-RUN php artisan db:seed --force --no-interaction || true
-
 # Vider les caches et regenerer l'autoloader
 RUN composer dumpautoload -o
 RUN php artisan config:clear || true
