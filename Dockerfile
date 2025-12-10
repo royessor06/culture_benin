@@ -37,5 +37,5 @@ RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cac
 # Exposer le port
 EXPOSE 8000
 
-# Démarrer Laravel
+# Démarrer Laravel (la vraie commande sera définie dans Render)
 CMD php artisan serve --host=0.0.0.0 --port=8000
