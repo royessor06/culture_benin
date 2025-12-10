@@ -46,4 +46,4 @@ RUN chown -R www-data:www-data /var/www/html \
 EXPOSE 80
 
 # Commande par défaut : lancer migrations + seeders puis Apache
-CMD ["apache2-foreground"]
+CMD php artisan migrate --force && php artisan db:seed --force && apache2-foreground
