@@ -1,41 +1,42 @@
-# Utiliser PHP 8.2 avec FPM
-FROM php:8.2-fpm
+# Utilise PHP 8.2 avec Apache
+FROM php:8.2-apache
 
-# Installer les dépendances systèmes nécessaires
+# Installer les extensions PHP nécessaires et PostgreSQL
 RUN apt-get update && apt-get install -y \
-    git unzip zip curl \
-    libpng-dev libonig-dev libxml2-dev libpq-dev libjpeg-dev libfreetype6-dev \
-    postgresql-client \
-    && rm -rf /var/lib/apt/lists/*
-
-# Configurer GD avec JPEG/Freetype
-RUN docker-php-ext-configure gd --with-freetype --with-jpeg
-
-# Installer les extensions PHP nécessaires
-RUN docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
+    zip \
+    unzip \
+    git \
+    curl \
+    libpq-dev \
+    && docker-php-ext-install pdo_mysql pdo_pgsql mbstring exif pcntl bcmath gd
 
 # Installer Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
 
-# Définir le répertoire de travail
-WORKDIR /var/www/html
+# Copier les fichiers du projet
+COPY . /var/www/html
 
-# Copier le projet
-COPY . .
+# Définir le dossier public comme racine pour Apache
+RUN sed -i 's|/var/www/html|/var/www/html/public|g' /etc/apache2/sites-available/000-default.conf
+RUN a2enmod rewrite
 
 # Installer les dépendances Laravel
+WORKDIR /var/www/html
 RUN composer install --optimize-autoloader --no-dev
-
-# Vider les caches et regenerer l'autoloader
 RUN composer dumpautoload -o
-RUN php artisan config:clear || true
-RUN php artisan cache:clear || true
 
-# Donner les bonnes permissions aux dossiers storage et cache
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
+# Donner les droits nécessaires
+RUN chown -R www-data:www-data /var/www/html \
+    && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
-# Exposer le port
-EXPOSE 8000
+# Ne PAS faire migrate ici ! (la DB n'est pas encore prête sur Render)
+# Les migrations seront lancées via Render "Post Deploy Command"
 
-# Démarrer Laravel (la vraie commande sera définie dans Render)
-CMD php artisan serve --host=0.0.0.0 --port=8000
+# Exposer le port d'Apache
+EXPOSE 80
+
+# Commande par défaut
+CMD ["apache2-foreground"]
