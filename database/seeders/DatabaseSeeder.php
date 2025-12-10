@@ -41,9 +41,9 @@ class DatabaseSeeder extends Seeder
             'langue_id' => 1,
         ]);
 
+        Utilisateur::factory(20)->create();
         Contenu::factory(30)->create();
         Media::factory(40)->create();
         Commentaire::factory(60)->create();
-        Utilisateur::factory(20)->create();
     }
 }
