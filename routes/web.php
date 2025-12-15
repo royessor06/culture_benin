@@ -83,12 +83,3 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/help/contact', [HelpController::class, 'sendMessage'])->name('help.send');
 
 });
-
-Route::get('/test-auth', function () {
-    $user = App\Models\Utilisateur::where('email', 'roy.savy@culture.bj')->first();
-    return [
-        'exists' => $user !== null,
-        'hash_ok' => Hash::check('Admin@culture@123', $user->mot_de_passe),
-        'auth_password_method' => method_exists($user, 'getAuthPassword'),
-    ];
-});
