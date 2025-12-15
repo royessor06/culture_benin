@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: culture-benin
+    env: php
+    buildCommand: |
+      composer install
+      php artisan config:clear
+      php artisan cache:clear
+      php artisan route:clear
+      php artisan view:clear
+    startCommand: |
+      php artisan serve --host 0.0.0.0 --port $PORT
