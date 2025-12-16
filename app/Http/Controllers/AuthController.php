@@ -65,7 +65,7 @@ class AuthController extends Controller
             'prenom'=>$validated['prenom'],
             'email'=>$validated['email'],
             'mot_de_passe'=>bcrypt($validated['mot_de_passe']),
-            'sexe' => $validated['sexe'] ?? 'non_defini',
+            'sexe' => 'X',
             'role_id'=>$roleAdmin->id,
         ]);
 
